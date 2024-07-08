@@ -4,7 +4,8 @@
   "description": "Nodejs Rest API with Express.js, Sequelize and Cloud MySQL",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [
     "nodejs",
@@ -15,6 +16,7 @@
   "author": "Thuc Hi Tran",
   "license": "ISC",
   "dependencies": {
+    "@sequelize/postgres": "^7.0.0-alpha.41",
     "argon2": "^0.40.3",
     "cors": "^2.8.5",
     "express": "^4.19.2",
