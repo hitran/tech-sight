@@ -25,29 +25,83 @@ db.managedBy = require("./models/managedBy.js")(db.sequelize, DataTypes);
 
 // Relate search history and user
 db.searchHistory.belongsTo(db.user, {
-  foreignKey: { name: "email", primaryKey: true },
+  foreignKey: {
+    name: "userEmail",
+    primaryKey: true,
+    constraints: true,
+    onDelete: "CASCADE",
+  },
 });
+
 // Relate comment and user
 db.comment.belongsTo(db.user, {
-  foreignKey: { name: "email", primaryKey: true },
+  foreignKey: {
+    name: "userEmail",
+    constraints: true,
+    onDelete: "CASCADE",
+  },
 });
-// Relate reply and user
-db.reply.belongsTo(db.user, {
-  foreignKey: { name: "email", primaryKey: true },
-});
+
 // Relate reply and comment
 db.reply.belongsTo(db.comment, {
-  foreignKey: { name: "date", primaryKey: true },
+  foreignKey: {
+    name: "commentId",
+    primaryKey: true,
+    constraints: true,
+    onDelete: "CASCADE",
+  },
 });
+
+// Relate reply and user
+db.reply.belongsTo(db.user, {
+  foreignKey: {
+    name: "userEmail",
+    primaryKey: true,
+    constraints: true,
+    onDelete: "CASCADE",
+  },
+});
+
 // Relate followedBy and user
-// db.followedBy.belongsTo(db.user, {
-//   foreignKey: { name: "email" },
-// });
+db.followedBy.belongsTo(db.user, {
+  foreignKey: {
+    name: "followerEmail",
+    primaryKey: true,
+    constraints: true,
+    onDelete: "CASCADE",
+  },
+});
+db.followedBy.belongsTo(db.user, {
+  foreignKey: {
+    name: "followeeEmail",
+    primaryKey: true,
+    constraints: true,
+    onDelete: "CASCADE",
+  },
+});
+
+// Relate managedBy, admin user and user
+db.managedBy.belongsTo(db.user, {
+  foreignKey: {
+    name: "userEmail",
+    primaryKey: true,
+    constraints: true,
+    onDelete: "CASCADE",
+  },
+});
+db.managedBy.belongsTo(db.adminUser, {
+  foreignKey: {
+    name: "adminEmail",
+    primaryKey: true,
+    constraints: true,
+    onDelete: "CASCADE",
+  },
+});
 
 // Include a sync option with seed data logic included
 db.sync = async () => {
   // sync schema
-  await db.sequelize.sync();
+  await db.sequelize.sync({ force: true });
   await seedData();
 };
 

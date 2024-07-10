@@ -1,5 +1,7 @@
-const comment = require("./comment");
-const user = require("./user");
+const { Sequelize } = require("sequelize");
+const db = {
+  Op: Sequelize.Op,
+};
 
 module.exports = (sequelize, DataTypes) =>
   sequelize.define(
@@ -11,22 +13,6 @@ module.exports = (sequelize, DataTypes) =>
       },
       reply_date: { type: DataTypes.DATE, primaryKey: true },
       description: { type: DataTypes.STRING(400), allowNull: false },
-      email: {
-        type: DataTypes.STRING(32),
-        primaryKey: true,
-        references: {
-          model: user,
-          key: "email",
-        },
-      },
-      commentDate: {
-        type: DataTypes.DATE,
-        primaryKey: true,
-        references: {
-          model: comment,
-          key: "date",
-        },
-      },
     },
     {
       timestamps: false,
