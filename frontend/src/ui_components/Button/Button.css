@@ -1,0 +1,20 @@
+button {
+    width: 200px;
+    border-radius: 20px 0 20px 0;
+    padding: 8px 8px !important;
+}
+
+.success {
+    background-color: #1B5816 !important;
+    color: white !important;
+}
+
+.error {
+    background-color: #BD2E2E !important;
+    color: white !important;;
+}
+
+.default {
+    background-color: #FFB703 !important;
+    color: #023047 !important;
+}
