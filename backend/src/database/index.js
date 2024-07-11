@@ -101,7 +101,7 @@ db.managedBy.belongsTo(db.adminUser, {
 // Include a sync option with seed data logic included
 db.sync = async () => {
   // sync schema
-  await db.sequelize.sync({ force: true });
+  await db.sequelize.sync({ force: true }); // NEED TO BE REMOVED IN PRODUCTION ENV
   await seedData();
 };
 
